@@ -1,2 +1,2 @@
-*.dat linguist-detectable=false
+dvdrental/* linguist-detectable=false
 *.sql linguist-detectable=true
