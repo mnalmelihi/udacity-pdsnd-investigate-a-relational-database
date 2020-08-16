@@ -3,8 +3,8 @@
 WITH
 t1 AS (
 SELECT customer_id,
-			 COUNT(*) AS num_of_films_rented,
-			 DENSE_RANK() OVER (ORDER BY COUNT(*) DESC) AS customer_rank
+	COUNT(*) AS num_of_films_rented,
+	DENSE_RANK() OVER (ORDER BY COUNT(*) DESC) AS customer_rank
 FROM rental
 GROUP BY 1
 ORDER BY 2 DESC
@@ -17,8 +17,7 @@ SELECT t1.customer_rank,
        CONCAT(first_name,' ',last_name) AS full_name,
        DATE_TRUNC('day',rental_date) AS day,
        COUNT(*) AS num_of_films_rented_per_day,
-       CAST(DATE_TRUNC('day',rental_date) AS DATE) -
-			 CAST(LAG(DATE_TRUNC('day',rental_date)) OVER (PARTITION BY t1.customer_id ORDER BY DATE_TRUNC('day',rental_date)) AS DATE) AS days_between_rentals
+       CAST(DATE_TRUNC('day',rental_date) AS DATE) - CAST(LAG(DATE_TRUNC('day',rental_date)) OVER (PARTITION BY t1.customer_id ORDER BY DATE_TRUNC('day',rental_date)) AS DATE) AS days_between_rentals
 FROM t1
 JOIN rental r
 ON t1.customer_id = r.customer_id
@@ -35,7 +34,6 @@ FROM t2
 GROUP BY 1,2
 ORDER BY 1
 
---------------------------------------------
 
 -- Q2: What is the most rented film category in (India, China, United States, Japan and Brazil) and how many times they were rented?
 WITH
@@ -78,7 +76,6 @@ ON t1.country = t2.country
 AND t1.num_of_rentals = t2.max_num_of_rentals
 ORDER BY 3 DESC
 
---------------------------------------------
 
 -- Q3: What is the most and least profitable films in store 1, And how many times they were rented?
 WITH
@@ -111,7 +108,6 @@ JOIN t2
 ON t1.total_earnings=t2.max
 OR t1.total_earnings=t2.min
 
---------------------------------------------
 
 -- Q4: What is the most and least preferred film length by customers?
 SELECT CASE
