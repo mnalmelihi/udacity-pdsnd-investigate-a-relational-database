@@ -1,2 +1,2 @@
-dvdrental/* linguist-detectable=false
+dvdrental/* linguist-vendored
 *.sql linguist-detectable=true
