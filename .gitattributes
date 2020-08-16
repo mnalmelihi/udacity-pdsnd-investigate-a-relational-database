@@ -1,2 +1,2 @@
-* linguist-vendored
-*.dat linguist-vendored=false
+*.dat linguist-detectable=false
+*.sql linguist-detectable=true
